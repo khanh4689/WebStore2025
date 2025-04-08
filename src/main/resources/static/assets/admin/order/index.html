@@ -1,0 +1,24 @@
+<div class="m-auto">
+    <div class="container" style="padding: 10px 0px">
+        <div class="d-flex justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab-order" role="tablist">
+                <button class="nav-link text-uppercase active"
+                        id="nav-order-list-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-order-list" type="button" role="tab"
+                        aria-controls="nav-order-list" aria-selected="true">
+                    Order list
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content m-auto" id="nav-tabContent-order">
+            <!-- Tab danh sách đơn hàng -->
+            <div class="tab-pane fade show active" id="nav-order-list"
+                 role="tabpanel" style="margin: 20px 0px"
+                 aria-labelledby="nav-order-list-tab" tabindex="0">
+                <!-- Giao diện bảng danh sách đơn hàng -->
+                <div ng-include="'/assets/admin/order/_table.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

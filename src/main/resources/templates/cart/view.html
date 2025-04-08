@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+    <main>
+        <div class="container mt-5 p-4 shadow-lg bg-light rounded" th:fragment="shopping-cart">
+            <h2 class="text-center text-primary mb-4">🛒 Giỏ hàng của bạn</h2>
+
+            <!-- Kiểm tra nếu giỏ hàng rỗng -->
+            <div ng-if="cart.items.length === 0" class="text-center">
+                <p class="text-danger fs-4">Giỏ hàng của bạn đang trống!</p>
+                <a href="/product/list" class="btn btn-outline-primary mt-3">Tiếp tục mua sắm</a>
+            </div>
+
+            <div ng-if="cart.items.length > 0">
+                <table class="table table-bordered text-center align-middle table-hover">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Tên sản phẩm</th>
+                            <th>Giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in cart.items" class="align-middle text-center">
+                            <td class="fw-bold text-primary">{{ item.id }}</td>
+                            <td class="text-start">{{ item.name }}</td>
+                            <td class="text-success fw-semibold">${{ item.price | number:2 }}</td>
+                            <td>
+                                <input ng-model="item.qty" type="number" min="1"
+                                       class="form-control text-center w-50 mx-auto"
+                                       ng-change="cart.saveToLocalStorage()">
+                            </td>
+                            <td class="text-danger fw-bold">${{ item.qty * item.price | number:2 }}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" ng-click="cart.remove(item.id)">
+                                    <i class="bi bi-trash"></i> Xóa
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Nút Xóa tất cả -->
+                <div class="text-center mt-3">
+                    <button class="btn btn-danger btn-lg" ng-click="cart.clear()">
+                        <i class="bi bi-trash3-fill"></i> Xóa tất cả
+                    </button>
+                </div>
+                
+                <!-- Tổng tiền -->
+                <div class="text-end mt-4">
+                    <h4 class="text-success fw-bold">Tổng tiền: <span>{{ cart.amount | number:2 }} $</span></h4>
+                </div>
+
+                <!-- Nút Thanh toán -->
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary btn-lg">
+                    	<a href="/order/checkout">
+                        <i class="bi bi-credit-card"></i> Thanh toán
+                        </a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

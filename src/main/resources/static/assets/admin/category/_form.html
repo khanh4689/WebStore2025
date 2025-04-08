@@ -1,0 +1,31 @@
+<div>
+    <form method="post" enctype="multipart/form-data" style="margin: 10px 0px">
+        <div class="card">
+            <div class="card-body">
+                <div class="content row">
+                    <div class="col-12">
+                        <div class="item ms-5">
+                            <label for="">Tên danh mục</label><br /> 
+                            <input type="text" ng-model="form.name" class="w-100 ps-2" required minlength="3" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white">
+                <button ng-click="create()" class="btn btn-primary text-white fw-bold">
+                    <i class="fa-solid fa-plus"></i> Thêm
+                </button>
+                <button ng-click="update()" class="btn btn-success text-white fw-bold">
+                    <i class="fa-solid fa-download"></i> Cập nhật
+                </button>
+                <button ng-click="delete(form)" class="btn btn-danger text-white fw-bold">
+                    <i class="fa-solid fa-trash"></i> Xóa
+                </button>
+                <button ng-click="reset()" class="btn btn-info text-white fw-bold">
+                    <i class="fa-solid fa-repeat"></i> Đặt lại
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

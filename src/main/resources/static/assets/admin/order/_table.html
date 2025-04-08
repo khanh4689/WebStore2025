@@ -1,0 +1,25 @@
+<table class="table table-bordered table-striped text-center">
+    <thead>
+        <tr class="table-dark">
+            <th>ID</th>
+            <th>Address</th>
+            <th>Create Date</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="order in orders">
+            <td>{{order.id}}</td>
+            <td>{{order.address}}</td>
+            <td>{{order.createDate | date : 'dd/MM/yyyy'}}</td>
+            <td>{{order.account.username}}</td>
+            <td>
+                <button class="btn btn-danger btn-sm"
+                        ng-click="delete(order)">
+                    Delete
+                </button>
+            </td>
+        </tr>
+    </tbody>
+</table>

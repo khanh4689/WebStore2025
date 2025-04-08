@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
+    
+    <body>
+        <main th:object="${order}">
+            <div class="container mt-4">
+                <h2 class="text-center mb-4 text-primary"><i class="bi bi-cart-check"></i> Order Detail</h2>
+                
+                <!-- Order Information -->
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-clipboard-check"></i> Order Number:</label>
+                    <input type="text" class="form-control" th:field="*{id}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-person-fill"></i> Purchaser:</label>
+                    <input type="text" class="form-control" th:field="*{account.username}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-calendar-check"></i> Date:</label>
+                    <input type="date" class="form-control" th:field="*{createDate}" readonly>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><i class="bi bi-geo-alt-fill"></i> Address:</label>
+                    <input type="text" class="form-control" th:field="*{address}" readonly>
+                </div>
+                
+                <!-- Order Items Table -->
+                <h4 class="mt-4 mb-3 text-secondary"><i class="bi bi-boxes"></i> Order Items</h4>
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="text-left">ID</th>
+                            <th class="text-left">Sản phẩm</th>
+                            <th class="text-left">Đơn giá</th>
+                            <th class="text-left">Số lượng</th>
+                            <th class="text-left">Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${order.orderDetails}">
+                            <td class="py-3">
+                                <div class="d-flex align-items-center">
+                                    <span th:text="${item.product.id}" class="fw-semibold"></span>
+                                </div>
+                            </td>
+                            <td class="py-3">
+                                <div class="d-flex align-items-center">
+                                    <span th:text="${item.product.name}" class="fw-semibold"></span>
+                                </div>
+                            </td>
+                            <td class="py-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="fw-semibold">
+                                    [[${#numbers.formatDecimal(item.price, 0,'COMMA', 2, 'POINT')}]] $
+                                    </span>
+                                </div>
+                            </td>
+                            <td class="py-3 text-center">
+                                <input th:value="${item.quantity}"
+                                       type="number" min="1" class="form-control w-25" readonly="readonly" />
+                            </td>
+                            <td class="py-3">
+                                <div class="d-flex align-items-center">
+                                    <span class="fw-semibold">
+                                        [[${#numbers.formatDecimal(item.price * item.quantity, 0,'COMMA', 2, 'POINT')}]] $
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+       
+    </body>
+</html>

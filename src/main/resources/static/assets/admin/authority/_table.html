@@ -1,0 +1,47 @@
+<div class="container">
+    <h3>Danh sách Quyền</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Tên đăng nhập</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Ảnh đại diện</th>
+                <th>Vai trò</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items.slice(begin, begin + 8)">
+                <td>{{ $index + 1 }}</td>
+                <td>{{ item.account.username }}</td>
+                <td>{{ item.account.fullname }}</td>
+                <td>{{ item.account.email }}</td>
+                <td><img ng-src="{{ item.account.photo }}" alt="Photo" width="50" height="50" /></td>
+                <td>{{ item.role }}</td>
+                <td>
+                    <button class="btn btn-warning" ng-click="edit(item)">Sửa</button>
+                    <button class="btn btn-danger" ng-click="delete(item)">Xóa</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            <li class="page-item" ng-click="first()">
+                <a class="page-link" href="#">Đầu</a>
+            </li>
+            <li class="page-item" ng-click="prev()">
+                <a class="page-link" href="#">Trước</a>
+            </li>
+            <li class="page-item" ng-click="next()">
+                <a class="page-link" href="#">Sau</a>
+            </li>
+            <li class="page-item" ng-click="last()">
+                <a class="page-link" href="#">Cuối</a>
+            </li>
+        </ul>
+    </nav>
+</div>

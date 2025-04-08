@@ -1,0 +1,37 @@
+<!-- File: /assets/admin/account/index.html -->
+<div class="m-auto">
+    <div class="container" style="padding: 10px 0px">
+        <div class="d-flex justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab-admin" role="tablist">
+                <button class="nav-link text-uppercase active"
+                        id="nav-account-list-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-account-list" type="button" role="tab"
+                        aria-controls="nav-account-list" aria-selected="true">
+                    Account list
+                </button>
+                <button class="nav-link text-uppercase"
+                        id="nav-create-admin-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-create-admin" type="button" role="tab"
+                        aria-controls="nav-create-admin" aria-selected="false">
+                    Create new admin
+                </button>
+            </div>
+        </div>
+
+        <div class="tab-content m-auto" id="nav-tabContent-admin">
+            <!-- Tab danh sách tài khoản -->
+            <div class="tab-pane fade show active" id="nav-account-list"
+                 role="tabpanel" style="margin: 20px 0px"
+                 aria-labelledby="nav-account-list-tab" tabindex="0">
+                <div ng-include="'/assets/admin/authority/_table.html'"></div>
+            </div>
+
+            <!-- Tab tạo tài khoản admin mới -->
+            <div class="tab-pane fade" id="nav-create-admin"
+                 role="tabpanel" style="margin: 20px 0px"
+                 aria-labelledby="nav-create-admin-tab" tabindex="0">
+                <div ng-include="'/assets/admin/authority/_form.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

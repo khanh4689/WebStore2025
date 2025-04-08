@@ -1,0 +1,70 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+	<div class="container-fluid">
+		<!-- Logo Home -->
+		<a class="navbar-brand" th:href="@{/}">
+			<i class="bi bi-house-door-fill"></i> Home
+		</a>
+
+		<!-- Button mở menu trên mobile -->
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+			data-bs-target="#mynavbar" aria-controls="mynavbar" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="mynavbar">
+			<!-- Danh sách menu chính -->
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/order/list}">
+							<i class="bi bi-cart-fill"></i> Orders
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link text-danger" th:href="@{/login/security/out}">
+							<i class="bi bi-box-arrow-right"></i> Log Out
+						</a>
+					</li>
+				</th:block>
+
+				<th:block th:unless="${#authorization.expression('isAuthenticated()')}">
+					<li class="nav-item">
+						<a class="nav-link text-success" th:href="@{/login/sign-in}">
+							<i class="bi bi-box-arrow-in-right"></i> Login
+						</a>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Thông tin đăng nhập -->
+			<ul class="navbar-nav ms-auto">
+				<th:block th:if="${#authorization.expression('isAuthenticated()')}">
+					<li class="nav-item">
+						<span class="nav-link text-light">
+							<i class="bi bi-person-circle"></i> 
+							<span th:text="${#authentication.name}"></span>
+						</span>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Admin Dashboard -->
+			<ul class="navbar-nav ms-auto">
+				<th:block th:if="${#authorization.expression('isAuthenticated() and hasRole(''STAF'')')}">
+					<li class="nav-item">
+						<a class="nav-link text-warning" th:href="@{/admin/home/index}">
+							<i class="bi bi-speedometer2"></i> Admin Dashboard
+						</a>
+					</li>
+				</th:block>
+			</ul>
+
+			<!-- Thanh tìm kiếm với Bootstrap Input Group -->
+			<form action="/product/search" method="get" class="d-flex ms-3">
+				<div class="input-group"></div>
+					<input type="text" name="name" class="form-control" placeholder="Search products...">
+					<button class="btn btn-outline-light" type="submit">
+						<i class="bi bi-search"></i>
+					</button>
+			</form>
