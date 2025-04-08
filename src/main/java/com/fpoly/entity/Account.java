@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity 
-@Table(name = "Accounts")
+@Table(name = "\"Accounts\"")
 public class Account  implements Serializable{
 	@Id
 	String username;

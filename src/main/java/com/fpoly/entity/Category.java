@@ -15,6 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Categories")
+
+
 public class Category implements Serializable{
 	@Id
 	String id;

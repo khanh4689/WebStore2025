@@ -30,7 +30,9 @@ public interface ProductDAO extends JpaRepository<Product, Integer> {
 	Page<Product> searchByName(@Param("name") String name, Pageable pageable);
 	
 	Page<Product> findByCategoryId(String cid, Pageable pageable);  
-    Page<Product> findAll(Pageable pageable);
+
+	Page<Product> findAll(Pageable pageable);
+
     
 
 	

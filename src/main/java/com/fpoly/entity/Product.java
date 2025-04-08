@@ -16,7 +16,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity @Table(name = "Products")
+@Entity
+@Table(name = "Products")
+
 public class Product  implements Serializable{
 	@Id	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
