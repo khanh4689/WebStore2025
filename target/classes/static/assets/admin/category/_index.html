@@ -1,0 +1,34 @@
+<div class="m-auto">
+    <div class="container" style="padding: 10px 0px">
+        <div class="d-flex justify-content-center">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link text-uppercase"
+                        id="nav-category-edition-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-category-edition" type="button" role="tab"
+                        aria-controls="nav-category-edition" aria-selected="false">
+                    Category edition</button>
+                <button class="nav-link text-uppercase active"
+                        id="nav-category-list-tab" data-bs-toggle="tab"
+                        data-bs-target="#nav-category-list" type="button" role="tab"
+                        aria-controls="nav-category-list" aria-selected="true">
+                    Category list</button>
+            </div>
+        </div>
+        <div class="tab-content m-auto" id="nav-tabContent">
+            <!-- Tab chỉnh sửa danh mục -->
+            <div class="tab-pane col-10 m-auto fade"
+                 style="padding-bottom: 50px" id="nav-category-edition" role="tabpanel"
+                 aria-labelledby="nav-category-edition-tab" tabindex="0">
+                <!-- Giao diện form chỉnh sửa danh mục -->
+                <div ng-include="'/assets/admin/category/_form.html'"></div>
+            </div>
+            <!-- Tab danh sách danh mục -->
+            <div class="tab-pane fade show active" id="nav-category-list" role="tabpanel"
+                 style="margin: 20px 0px" aria-labelledby="nav-category-list-tab"
+                 tabindex="0">
+                <!-- Giao diện bảng danh sách danh mục -->
+                <div ng-include="'/assets/admin/category/_table.html'"></div>
+            </div>
+        </div>
+    </div>
+</div>

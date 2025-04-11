@@ -1,0 +1,32 @@
+<div>
+	
+</div>
+
+<div>
+	<table class="table table-hover table-bordered">
+		<thead>
+			<tr class="text-center">
+				<th>Id</th>
+				<th>Tên danh mục</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="text-center" ng-repeat="c in items | orderBy | limitTo:8:begin">
+				<td>{{c.id}}</td>
+				<td>{{c.name}}</td>
+				<td>
+					<button ng-click="edit(c)" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></button>
+					<button ng-click="delete(c)" type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="text-center">
+		<button ng-click="first()" type="button" class="btn btn-dark"><i class="fa-solid fa-arrow-up"></i></button>
+		<button ng-click="prev()" type="button" class="btn btn-dark"><i class="fa-solid fa-arrow-left"></i></button>
+		<button type="button" class="btn btn-dark">{{currentPage}} of {{ pageCount }}</button>
+		<button ng-click="next()" type="button" class="btn btn-dark"><i class="fa-solid fa-arrow-right"></i></button>
+		<button ng-click="last()" type="button" class="btn btn-dark"><i class="fa-solid fa-arrow-down"></i></button>
+	</div>
+</div>

@@ -1,0 +1,22 @@
+<div class="panel panel-default mt-3">
+    <div class="panel-body">
+        <table class="table table-hover table-bordered">
+            <thead class="bg-primary text-white">
+                <tr class="text-center">
+                    <th class="align-middle">Tên Nhân Viên</th>
+                    <th ng-repeat="role in roles" class="align-middle">{{role.name}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" ng-repeat="acc in admins">
+                    <td class="align-middle">{{acc.fullname}}</td>
+                    <td ng-repeat="role in roles" class="text-center">
+                        <input type="checkbox" ng-checked="authority_of(acc, role)"
+                               ng-click="authority_changed(acc, role)"
+                               class="form-check-input">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
