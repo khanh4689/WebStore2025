@@ -1,1 +1,30 @@
 
+# Java
+*.class
+*.jar
+*.war
+*.log
+*.iml
+
+# Maven
+target/
+
+# IntelliJ
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# STS / Eclipse
+.project
+.classpath
+.settings/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env files
+.env
+pp.env
+src/main/resources/application.properties
