@@ -15,6 +15,27 @@ app.controller("order-ctrl", function($scope, $http) {
     $scope.viewDetails = function(order) {
         $scope.selectedOrder = order;
     };
+	
+	$scope.updateStatus = function(order) {
+	    $http.put("/rest/orders/" + order.id + "/status", order)
+	        .then(resp => {
+	            alert("Cập nhật trạng thái thành công!");
+	        }).catch(error => {
+	            alert("Lỗi cập nhật trạng thái!");
+	            console.log(error);
+	        });
+	};
+	
+	$scope.selectedOrder = null;
+
+	$scope.viewOrder = function(order) {
+	    $http.get("/rest/orders/" + order.id).then(resp => {
+	        $scope.selectedOrder = resp.data;
+	        $('#orderModal').modal('show'); // gọi modal lên nếu có dùng Bootstrap
+	    });
+	};
+
+
 
     // Xoá đơn hàng
     $scope.delete = function(order) {

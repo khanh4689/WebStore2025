@@ -16,4 +16,6 @@ public interface OrderService {
 
     void deleteById(Long id);
 
+	Order save(Order order);
+
 }

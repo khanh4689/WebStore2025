@@ -22,6 +22,12 @@ public class SecurityConfig {
 	
 	@Autowired
 	MyUserDetailService myUserDetailService;
+	@Autowired
+	CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+	@Autowired
+	CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -31,39 +37,42 @@ public class SecurityConfig {
 			.authorizeHttpRequests(registry -> {
 				registry.requestMatchers("/order/**").authenticated();
 				registry.requestMatchers("/admin/**").hasAnyRole("STAF", "DIRE");
-			
+				registry.requestMatchers("/rest/authorities").hasRole("DIRE");
+				
 				registry.anyRequest().permitAll();
 			});
-		
+
 		httpSecurity.formLogin(loginPage -> {
-			loginPage.loginPage("/login/sign-in").permitAll();
-			loginPage.loginProcessingUrl("/login/security");
-			loginPage.defaultSuccessUrl("/login/security/success", false);
-			loginPage.failureUrl("/login/security/error");
-		});
+		    loginPage.loginPage("/login/sign-in").permitAll();
+		    loginPage.loginProcessingUrl("/login/security");
+		    loginPage.successHandler(customAuthenticationSuccessHandler);
+	        loginPage.failureHandler(customAuthenticationFailureHandler); 
+		    loginPage.failureUrl("/login/security/error");
 		
-		// Nếu bạn sử dụng OAuth2, bỏ comment phần này
-		/*
-		httpSecurity.oauth2Login(oauth2 -> {
-			oauth2.loginPage("/login/oauth2/authorization/google");
-			oauth2.userInfoEndpoint(u -> u.userService(new CustomerOAuth2UserService()));
-			oauth2.defaultSuccessUrl("/login/security/success", false);
-			oauth2.failureUrl("/login/security/error");
+		    
 		});
-		*/
-	
+
+
+		httpSecurity.oauth2Login()
+			.loginPage("/auth/login/form")
+			.defaultSuccessUrl("/auth2/login/success", true)
+			.failureUrl("/auth/login/error")
+			.authorizationEndpoint()
+				.baseUri("/oauth2/authorization");
+
 		httpSecurity.rememberMe(re -> {
 			re.userDetailsService(userDetailsService());
 			re.tokenValiditySeconds(86400);
 		});
-		
+
 		httpSecurity.logout(lo -> {
 			lo.logoutUrl("/login/security/out");
 			lo.logoutSuccessUrl("/login/security/out/success");
 		});
-		
+
 		return httpSecurity.build();
 	}
+	
 	
 	@Bean
 	public UserDetailsService userDetailsService() {
@@ -88,11 +97,5 @@ public class SecurityConfig {
 		return web -> web.ignoring().requestMatchers("/static/**");
 	}
 	
-	// Thêm bean này nếu bạn cần OAuth2, nếu không có thể bỏ qua
-	/*
-	@Bean
-	public ClientRegistrationRepository clientRegistrationRepository() {
-		return new InMemoryClientRegistrationRepository(ClientRegistration.withRegistrationId("google").build());
-	}
-	*/
+	
 }

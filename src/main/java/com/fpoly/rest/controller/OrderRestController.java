@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,6 +33,13 @@ public class OrderRestController {
 	@GetMapping("{id}")
 	public Order getOrder(@PathVariable("id") Long id) {
 	    return orderService.findById(id);
+	}
+	
+	@PutMapping("{id}/status")
+	public Order updateStatus(@PathVariable("id") Long id, @RequestBody Order updatedOrder) {
+	    Order order = orderService.findById(id);
+	    order.setStatus(updatedOrder.getStatus());
+	    return orderService.save(order);
 	}
 
 	

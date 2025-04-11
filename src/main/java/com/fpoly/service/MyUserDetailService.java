@@ -1,7 +1,6 @@
 package com.fpoly.service;
 
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -21,7 +20,7 @@ public class MyUserDetailService implements UserDetailsService {
     private AccountService accountService;
     
     @Autowired
-    @Lazy // Thêm annotation @Lazy vào đây
+    @Lazy 
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -30,18 +29,20 @@ public class MyUserDetailService implements UserDetailsService {
         
         if (user.isPresent()) {
             Account userObj = user.get();
-            String storedPassword = userObj.getPassword();
 
-            // Kiểm tra nếu mật khẩu chưa mã hóa thì mã hóa lại
-            if (storedPassword == null || !storedPassword.startsWith("$2a$")) {  
+            // Không kiểm tra BLOCK tại đây nữa
+
+            // Mã hóa mật khẩu nếu chưa mã hóa
+            String storedPassword = userObj.getPassword();
+            if (storedPassword == null || !storedPassword.startsWith("$2a$")) {
                 String encodedPassword = passwordEncoder.encode(storedPassword);
                 userObj.setPassword(encodedPassword);
-                accountService.update(userObj);  
+                accountService.update(userObj);
             }
 
             return User.builder()
                     .username(userObj.getUsername())
-                    .password(userObj.getPassword())  // Đã đảm bảo mật khẩu mã hóa
+                    .password(userObj.getPassword())
                     .roles(userObj.getAuthorities().stream()
                         .map(er -> er.getRole().getId())
                         .toArray(String[]::new))

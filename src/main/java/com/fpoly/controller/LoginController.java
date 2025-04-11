@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fpoly.entity.Account;
@@ -20,6 +21,8 @@ import com.fpoly.service.AccountService;
 import com.fpoly.service.AuthorityService;
 import com.fpoly.service.MyUserDetailService;
 import com.fpoly.service.RoleService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 
 
@@ -68,11 +71,11 @@ public class LoginController {
         return "redirect:/product/list";
     }
     
-    @GetMapping("security/error")
-    public String error(Model model) {
-    	model.addAttribute("message", "Sai thông tin đăng nhập");
-    	return "/security/login";
-    }
+   
+
+
+
+
     
     @GetMapping("security/out")
     public String logout(RedirectAttributes redirectAttributes) {

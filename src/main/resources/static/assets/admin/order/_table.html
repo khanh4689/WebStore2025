@@ -1,25 +1,74 @@
 <table class="table table-bordered table-striped text-center">
-    <thead>
-        <tr class="table-dark">
-            <th>ID</th>
-            <th>Address</th>
-            <th>Create Date</th>
-            <th>Username</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="order in orders">
-            <td>{{order.id}}</td>
-            <td>{{order.address}}</td>
-            <td>{{order.createDate | date : 'dd/MM/yyyy'}}</td>
-            <td>{{order.account.username}}</td>
-            <td>
-                <button class="btn btn-danger btn-sm"
-                        ng-click="delete(order)">
-                    Delete
-                </button>
-            </td>
-        </tr>
-    </tbody>
+	<thead>
+		<tr class="table-dark">
+			<th>ID</th>
+			<th>Address</th>
+			<th>Create Date</th>
+			<th>Username</th>
+			<th>Actions</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="order in orders | orderBy:'-createDate'">
+			<td>{{order.id}}</td>
+			<td>{{order.address}}</td>
+			<td>{{order.createDate | date : 'dd/MM/yyyy'}}</td>
+			<td>{{order.account.username}}</td>
+			<td><select class="form-select form-select-sm"
+				ng-model="order.status" ng-change="updateStatus(order)">
+					<option value="DANG_XU_LY">Đang xử lý</option>
+					<option value="GIAO_HANG_THANH_CONG">Giao hàng thành công</option>
+					<option value="NGUNG_XU_LY">Ngừng xử lý</option>
+			</select></td>
+
+			<td>
+				<button class="btn btn-info btn-sm" ng-click="viewOrder(order)">Xem thêm</button>
+				<button class="btn btn-danger btn-sm" ng-click="delete(order)">
+					Delete</button>
+			</td>
+		</tr>
+	</tbody>
 </table>
+<!-- Modal -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">Chi tiết đơn hàng #{{selectedOrder.id}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <p><strong>Người mua:</strong> {{selectedOrder.account.username}}</p>
+        <p><strong>Địa chỉ:</strong> {{selectedOrder.address}}</p>
+        <p><strong>Ngày tạo:</strong> {{selectedOrder.createDate | date:'dd/MM/yyyy'}}</p>
+
+        <table class="table table-bordered">
+          <thead class="table-dark">
+            <tr>
+              <th>ID SP</th>
+              <th>Tên SP</th>
+              <th>Đơn giá</th>
+              <th>Số lượng</th>
+              <th>Thành tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in selectedOrder.orderDetails">
+              <td>{{item.product.id}}</td>
+              <td>{{item.product.name}}</td>
+              <td>{{item.price | currency}}</td>
+              <td>{{item.quantity}}</td>
+              <td>{{item.price * item.quantity | currency}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+      </div>
+    </div>
+  </div>
+</div>

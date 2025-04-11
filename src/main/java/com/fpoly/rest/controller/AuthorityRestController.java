@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fpoly.dao.AccountDAO;
+import com.fpoly.dao.AuthorityDAO;
+import com.fpoly.dao.RoleDAO;
 import com.fpoly.entity.Authority;
 import com.fpoly.service.AuthorityService;
 
@@ -25,6 +28,12 @@ import com.fpoly.service.AuthorityService;
 public class AuthorityRestController {
 	@Autowired
 	AuthorityService authorityService;
+	@Autowired
+	AuthorityDAO authorityDAO;
+	@Autowired
+	AccountDAO accountDAO;
+	@Autowired
+	RoleDAO dao;
 
 	@GetMapping("/authorities")
 	public List<Authority> findAll(@RequestParam("admin") Optional<Boolean> admin) {

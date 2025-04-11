@@ -1,6 +1,16 @@
 const app = angular.module("shopping-cart-app", []);
 
+
 app.controller("shopping-cart-ctrl", function ($scope, $http) {
+	// Địa chỉ từ API
+	$scope.provinces = [];
+	$scope.districts = [];
+	$scope.wards = [];
+
+	$scope.selectedProvince = null;
+	$scope.selectedDistrict = null;
+	$scope.selectedWard = null;
+	$scope.street = "";
     $scope.cart = {
         items: [],
 
@@ -36,11 +46,7 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
             this.saveToLocalStorage();
         },
 
-        // Xóa toàn bộ giỏ hàng
-        clear() {
-            this.items = [];
-            this.saveToLocalStorage();
-        },
+        
 
         // Tính tổng tiền của một sản phẩm
         amt_of(item) {
@@ -82,7 +88,56 @@ app.controller("shopping-cart-ctrl", function ($scope, $http) {
 
     // Khởi động: tải giỏ hàng từ localStorage
     $scope.cart.loadFromLocalStorage();
-	
+	// Load Tỉnh/Thành
+	$scope.loadProvinces = function () {
+	    $http.get("https://provinces.open-api.vn/api/p/").then(resp => {
+	        $scope.provinces = resp.data;
+	    });
+	};
+
+	// Load Quận/Huyện khi chọn tỉnh
+	$scope.loadDistricts = function () {
+	    if (!$scope.selectedProvince) return;
+	    $http.get(`https://provinces.open-api.vn/api/p/${$scope.selectedProvince.code}?depth=2`)
+	        .then(resp => {
+	            $scope.districts = resp.data.districts;
+	            $scope.selectedDistrict = null;
+	            $scope.wards = [];
+	            $scope.selectedWard = null;
+	            $scope.updateAddress();
+	        });
+	};
+
+	// Load Phường/Xã khi chọn huyện
+	$scope.loadWards = function () {
+	    if (!$scope.selectedDistrict) return;
+	    $http.get(`https://provinces.open-api.vn/api/d/${$scope.selectedDistrict.code}?depth=2`)
+	        .then(resp => {
+	            $scope.wards = resp.data.wards;
+	            $scope.selectedWard = null;
+	            $scope.updateAddress();
+	        });
+	};
+
+	// Gộp địa chỉ lại
+	$scope.updateAddress = function () {
+	    const parts = [
+	        $scope.street,
+	        $scope.selectedWard?.name,
+	        $scope.selectedDistrict?.name,
+	        $scope.selectedProvince?.name
+	    ].filter(Boolean); // Lọc bỏ undefined/null
+	    $scope.order.address = parts.join(', ');
+	};
+
+
+	// Theo dõi thay đổi để cập nhật địa chỉ
+	$scope.$watchGroup(['street', 'selectedProvince', 'selectedDistrict', 'selectedWard'], function () {
+	    $scope.updateAddress();
+	});
+
+	// Gọi khi load trang
+	$scope.loadProvinces();
 	$scope.order ={
 		createDate: new Date(),
 		address: "",

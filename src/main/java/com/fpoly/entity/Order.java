@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -30,7 +31,12 @@ public class Order  implements Serializable{
 	@JoinColumn(name = "Username")
 	Account account;
 	
-	@JsonIgnore
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	Status status = Status.DANG_XU_LY;
+
+	
+	@JsonIgnoreProperties("order")
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 	List<OrderDetail> orderDetails;
 

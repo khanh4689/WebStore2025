@@ -55,5 +55,10 @@ public class OrderServiceImpl implements OrderService{
 	    public void deleteById(Long id) {
 	        dao.deleteById(id);
 	    }
+		@Override
+		public Order save(Order order) {
+			
+			return dao.save(order);
+		}
 
 }

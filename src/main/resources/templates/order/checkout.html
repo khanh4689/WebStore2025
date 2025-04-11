@@ -1,31 +1,56 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{/layout/index :: dynamic(~{::main})}">
-  
-    <body>
-        <main>
-        <div th:replace="~{/cart/view::shopping-cart}"></div>
-           <div class="container mt-5">
-        <div class="card p-4 shadow-sm">
-            <h2 class="mb-4 text-center"><i class="bi bi-cart-check"></i> Checkout</h2>
-            
-                <div class="mb-3">
-                <div>Purchaser</div>
-                   <span id="username" th:text="${#authentication.name}"></span>
-                </div>
-                
-                <div class="mb-3">
-                    <div>Date</div>
-                    <div class="form-control">{{order.createDate | date:'dd-MM-yyyy'}}</div>
-                </div>
-                
-                <div class="mb-3">
-                   <textarea ng-model = "order.address" class="form-control"></textarea>
-                </div>
-                
-                <button ng-click="order.purchase()" class="btn btn-success"></i> Thanh toán</button>
-           
-        </div>
-    </div>
-        </main>
-    </body>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="~{/layout/index :: dynamic(~{::main})}">
+
+<body>
+	<main>
+		<div th:replace="~{/cart/view::shopping-cart}"></div>
+		<div class="container mt-5">
+			<div class="card p-4 shadow-sm">
+				<h2 class="mb-4 text-center">
+					<i class="bi bi-cart-check"></i> Checkout
+				</h2>
+
+				<div class="mb-3">
+					<div>Purchaser</div>
+					<span id="username" th:text="${#authentication.name}"></span>
+				</div>
+
+				<div class="mb-3">
+					<div>Date</div>
+					<div class="form-control">{{order.createDate |
+						date:'dd-MM-yyyy'}}</div>
+				</div>
+
+				<select class="form-control mb-2" ng-model="selectedProvince"
+					ng-change="loadDistricts()"
+					ng-options="province.name for province in provinces">
+					<option value="">Chọn Tỉnh/Thành</option>
+				</select> <select class="form-control mb-2" ng-model="selectedDistrict"
+					ng-change="loadWards()"
+					ng-options="district.name for district in districts"
+					ng-disabled="!selectedProvince">
+					<option value="">Chọn Quận/Huyện</option>
+				</select> <select class="form-control mb-2" ng-model="selectedWard"
+					ng-options="ward.name for ward in wards"
+					ng-disabled="!selectedDistrict">
+					<option value="">Chọn Phường/Xã</option>
+				</select>
+
+				<!-- Nhập số nhà, tên đường -->
+				<input type="text" class="form-control mb-2" ng-model="street"
+					placeholder="Số nhà, tên đường" />
+
+				<!-- Textarea hiển thị địa chỉ cuối cùng -->
+				<textarea ng-model="order.address" class="form-control mb-3"
+					readonly></textarea>
+
+				<button ng-click="order.purchase()" class="btn btn-success">
+					</i> Thanh toán
+				</button>
+
+			</div>
+		</div>
+	</main>
+</body>
 </html>
