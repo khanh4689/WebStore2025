@@ -1,73 +1,66 @@
-# 🛒 ShopStore
+# 🛒 WebStore2025
 
-ShopStore là một website thương mại điện tử đơn giản hỗ trợ khách hàng mua sắm, nhân viên theo dõi đơn hàng, và quản lý kiểm soát hệ thống sản phẩm/danh mục hiệu quả.
+**WebStore2025** là một ứng dụng web thương mại điện tử phát triển bằng **Spring Boot** và **Thymeleaf**, hỗ trợ trải nghiệm mua sắm trực tuyến và quản lý bán hàng một cách hiệu quả cho cả khách hàng và nhân viên.
 
 ---
 
-## 📌 Hình ảnh trang web
+## 📸 Giao diện chính
 
-### 👥 Trang chủ 
-![Image](https://github.com/user-attachments/assets/eca5751b-9a34-4004-9253-38b2630f8711)
-### 👥 Trang đăng nhập
-![Image](https://github.com/user-attachments/assets/b97650a7-3261-4e3e-856b-067ffa685597)
-### 👥 Trang đăng ký
-![Image](https://github.com/user-attachments/assets/3cc57c5c-7a71-4da0-a926-10c864552cc7)
-### 👥 Trang tìm kiếm theo tên sản phẩm
-![Image](https://github.com/user-attachments/assets/e4182d8d-a2de-4a58-832c-08cfcf925009)
-### 👥 Trang giỏ hàng
-![Image](https://github.com/user-attachments/assets/bf59001b-45cc-4fad-b378-374e5560b6b1)
-### 👥 Khung thanh toán
-![Image](https://github.com/user-attachments/assets/11f82546-8e41-4b97-bd40-90fc7019ec07)
-### 👥 Quản lý sản phẩm
-![Image](https://github.com/user-attachments/assets/907983c2-8180-4b23-a80f-0bddf216f4fa)
-![Image](https://github.com/user-attachments/assets/ce8c0bb6-8a2c-4482-8bd4-6aa520b4cf89)
-### 👥 Quản lý danh mục
-![Image](https://github.com/user-attachments/assets/89cfee6b-668e-4283-8282-01c0cd83ba1e)
-![Image](https://github.com/user-attachments/assets/55311a0c-30bc-495a-9b90-3de0503b1677)
-### 👥 Quản lý đơn hàng
-![Image](https://github.com/user-attachments/assets/48636724-f7e1-499a-8818-4ace7c0ba4ac)
-### 👥 Quản lý tài khoản nhân viên
-![Image](https://github.com/user-attachments/assets/3118e1d8-864e-4fd6-b9a5-b167b90c9ab1)
-![Image](https://github.com/user-attachments/assets/7467414c-e32b-46cf-a62f-56db438a8abc)
+| Trang | Hình ảnh |
+|------|----------|
+| **Trang chủ** | ![Trang chủ](https://github.com/user-attachments/assets/eca5751b-9a34-4004-9253-38b2630f8711) |
+| **Đăng nhập** | ![Đăng nhập](https://github.com/user-attachments/assets/44d5f907-038c-4a72-8082-a2b71e544b01) |
+| **Tài khoản bị khóa** | ![Khóa](https://github.com/user-attachments/assets/3c541569-2997-45e1-97f0-095783f968b2) |
+| **Đăng ký** | ![Đăng ký](https://github.com/user-attachments/assets/3e82c574-71fc-4f10-a7c8-ded4c87674d8) |
+| **Tìm kiếm sản phẩm** | ![Tìm kiếm](https://github.com/user-attachments/assets/e4182d8d-a2de-4a58-832c-08cfcf925009) |
+| **Giỏ hàng** | ![Giỏ hàng](https://github.com/user-attachments/assets/bf59001b-45cc-4fad-b378-374e5560b6b1) |
+| **Thanh toán & kết quả** | ![Thanh toán](https://github.com/user-attachments/assets/10781c8c-3076-499f-b864-fe692462ca5d) ![Thành công](https://github.com/user-attachments/assets/96b6d43e-dab9-4510-93a1-f5d82fbff022) |
+| **Quản lý sản phẩm** | ![Quản lý sản phẩm](https://github.com/user-attachments/assets/907983c2-8180-4b23-a80f-0bddf216f4fa) |
+| **Quản lý danh mục** | ![Danh mục](https://github.com/user-attachments/assets/55311a0c-30bc-495a-9b90-3de0503b1677) |
+| **Quản lý đơn hàng** | ![Đơn hàng](https://github.com/user-attachments/assets/4b478357-7b0b-422b-8378-1cd8b80d165a) |
+| **Quản lý nhân viên** | ![Tài khoản nhân viên](https://github.com/user-attachments/assets/5625a08a-a0e2-415d-b50d-a8a814d9d5a9) |
 
-## 📌 Tính năng chính
+---
+
+## 🚀 Tính năng nổi bật
 
 ### 👥 Dành cho khách hàng:
-- Đăng ký / Đăng nhập / Đăng xuất
-- 
-- Tìm kiếm sản phẩm(Tìm kiếm theo tên, theo danh mục)
-- Xem tất cả sản phẩm hoặc theo danh mục
-- Thêm sản phẩm vào giỏ hàng
-- Thanh toán đơn hàng
-- Xem lịch sử đơn hàng đã mua
 
-### 🔐 Dành cho admin & nhân viên:
-- CRUD sản phẩm ( Thêm, xóa sản phẩm. Cập nhật trừ id)
-- CRUD danh mục sản phẩm( Thêm, xóa sản phẩm. Cập nhật trừ id)
-- CRUD đơn hàng( Xóa đơn hàng)
-- Cấp quyền nhân viên cho user(Chỉ cập nhật quyền nhân viên cho user)
-  
+- Đăng ký, đăng nhập tài khoản (hỗ trợ Google/Facebook).
+- Duyệt danh mục sản phẩm.
+- Xem chi tiết sản phẩm.
+- Thêm/sửa/xóa sản phẩm trong giỏ hàng.
+- Đặt hàng, thanh toán, xem lịch sử đơn hàng.
 
+### 🛠️ Dành cho quản trị viên/nhân viên:
 
-
-## 🛠 Công nghệ sử dụng
-
-- 💻 **Backend:** Spring Boot, Spring Security, JWT
-- 🌐 **Frontend:** Thymeleaf, Bootstrap
-- 🗄 **Cơ sở dữ liệu:** SQL Server 2017
+- **Quản lý sản phẩm**: thêm, sửa, xóa sản phẩm; upload ảnh.
+- **Quản lý danh mục**: thêm, sửa, xóa danh mục sản phẩm.
+- **Quản lý đơn hàng**: cập nhật trạng thái đơn hàng (Chờ xử lý, Đang giao, Hoàn tất, Hủy).
+- **Quản lý người dùng**:
+  - Gán quyền: `USER`, `STAFF`, `BLOCK`.
+  - Khóa/mở tài khoản người dùng.
 
 ---
 
-## ▶️ Hướng dẫn cài đặt & chạy dự án
+## 🔐 Bảo mật hệ thống
 
-### 1. Yêu cầu hệ thống
-- Java 17+
-- Maven 3.9+
-- SQL Server 2017 (đã khởi động SQL Server và tạo sẵn database)
-- IDE: Eclipse hoặc IntelliJ IDEA
+Hệ thống sử dụng **Spring Security**, **JWT** và **OAuth2** để bảo vệ thông tin và xác thực người dùng.
 
-### 2. Clone và cấu hình
+### 🔑 Phân quyền truy cập
 
-```bash
-git clone https://github.com/khanh4689/WebStore2025.git
-cd WebStore2025
+- Người dùng cần **đăng nhập** để:
+  - Thêm sản phẩm vào giỏ.
+  - Đặt hàng, thanh toán.
+  - Xem lịch sử đơn hàng.
+
+- Các vai trò chính:
+  - `ROLE_USER`: Người mua hàng.
+  - `ROLE_ADMIN`: Quản trị viên.
+
+### 🛡️ Xác thực với JWT
+
+- Sau khi đăng nhập thành công → hệ thống sinh ra **JWT token**.
+- JWT gắn trong `Authorization` header mỗi lần gọi API:
+  ```http
+  Authorization: Bearer <token>
