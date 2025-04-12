@@ -23,6 +23,6 @@ public class OrderDetail  implements Serializable{
 	@JoinColumn(name = "Productid")
 	Product product;
 	@ManyToOne
-	@JoinColumn(name = "Orderid")
-	Order order;
+	@JoinColumn(name = "orderId", nullable = false)
+	private Order order;
 }

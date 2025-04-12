@@ -29,12 +29,12 @@ public class OrderServiceImpl implements OrderService{
 	public Order create(JsonNode orderData) {
 		ObjectMapper mapper = new ObjectMapper();
 		Order order = mapper.convertValue(orderData, Order.class);
-		dao.save(order);
-		TypeReference<List<OrderDetail>> type = new TypeReference<List<OrderDetail>>() {};
-		List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"),type )
-				.stream().peek(d->d.setOrder(order)).collect(Collectors.toList());
-		ddao.saveAll(details);
-		
+		TypeReference<List<OrderDetail>> type = new TypeReference<>() {};
+		List<OrderDetail> details = mapper.convertValue(orderData.get("orderDetails"), type)
+		    .stream().peek(d -> d.setOrder(order)).collect(Collectors.toList());
+
+		order.setOrderDetails(details); // gán trước
+		dao.save(order); // save sau khi đã gán đầy đủ
 		return order;
 	}
 	@Override
