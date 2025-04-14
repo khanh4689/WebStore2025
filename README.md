@@ -63,6 +63,6 @@ Authorization: Bearer <token>
 git clone https://github.com/khanh4689/WebStore2025.git
 cd WebStore2025
 
-SQL at 
+SQL at src/main/resources/sql
 
 
